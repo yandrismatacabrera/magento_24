@@ -9,7 +9,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="OY_Registry::apiregistry" title="ApiRegistry" translate="title" sortOrder="110" />
+                <resource id="OY_Registry::registry" title="Registry" translate="title" sortOrder="110" />
             </resource>
         </resources>
     </acl>

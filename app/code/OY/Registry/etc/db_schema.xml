@@ -4,6 +4,7 @@
     <table name="registry_entity" resource="default" engine="innodb" comment="Registry Table">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Entity ID"/>
         <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Customer ID"/>
+        <column xsi:type="varchar" name="fullname" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Fullname"/>
         <column xsi:type="datetime" name="date_time" on_update="false" nullable="false" comment="Date and Time"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
