@@ -18,4 +18,10 @@
             <resource ref="OY_Registry::registry"/>
         </resources>
     </route>
+    <route method="POST" url="/V1/registry/registrycustomer">
+        <service class="OY\Registry\Api\RegistryManagementInterface" method="registryCustomer"/>
+        <resources>
+            <resource ref="OY_Registry::registry"/>
+        </resources>
+    </route>
 </routes>

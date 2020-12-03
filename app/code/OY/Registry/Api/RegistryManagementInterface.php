@@ -20,4 +20,10 @@ interface RegistryManagementInterface
      * @return string
      */
     public function createCustomer();
+
+    /**
+     * POST for Registry api
+     * @return string
+     */
+    public function registryCustomer();
 }
