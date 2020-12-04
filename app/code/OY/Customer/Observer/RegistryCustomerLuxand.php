@@ -43,6 +43,7 @@ class RegistryCustomerLuxand implements ObserverInterface
         $registry = $this->luxand->createCustomer($customer->getId(), 0, $imagePub);
 
         if($registry){
+            print_r($registry);die;
           $customer->setCustomAttribute('luxand_registry',1);
           $this->customerRepository->save($customer);
         }
