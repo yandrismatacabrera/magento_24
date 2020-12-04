@@ -28,7 +28,7 @@ class RegistryCustomerLuxand implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        /*$customer = $this->customerRepository->getById($observer->getCustomer()->getId());
+        $customer = $this->customerRepository->getById($observer->getCustomer()->getId());
 
         $img=$customer->getCustomAttribute('customer_image')->getValue();
 
@@ -39,7 +39,7 @@ class RegistryCustomerLuxand implements ObserverInterface
         print_r($imagePub);
         print_r('<br>');
         print_r($registry);die;
-        $this->manager->addNoticeMessage($registry);*/
+        $this->manager->addNoticeMessage($registry);
 
         return $this;
     }
