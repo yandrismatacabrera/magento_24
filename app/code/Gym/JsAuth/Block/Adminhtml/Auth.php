@@ -41,4 +41,9 @@ class Auth extends Template
         // this is used to make a call to recognition api
         return '92900c4118484515ab836f0faefcf2e5';
     }
+
+    public function getUrlRegistry()
+    {
+        return $this->getUrl('registry/ajax/registry', []);
+    }
 }
