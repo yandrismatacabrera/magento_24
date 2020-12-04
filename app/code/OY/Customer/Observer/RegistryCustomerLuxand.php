@@ -28,6 +28,7 @@ class RegistryCustomerLuxand implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+
         $customer = $this->customerRepository->getById($observer->getCustomer()->getId());
 
         if($customer->getCustomAttribute('luxand_registry') && $customer->getCustomAttribute('luxand_registry')->getValue()){
@@ -43,6 +44,7 @@ class RegistryCustomerLuxand implements ObserverInterface
 
         if($registry){
           $customer->setCustomAttribute('luxand_registry',1);
+          $this->customerRepository->save($customer);
         }
 
         return $this;
