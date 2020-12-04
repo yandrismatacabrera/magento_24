@@ -73,21 +73,19 @@ class Luxand extends \Magento\Framework\App\Helper\AbstractHelper
         curl_setopt_array($curl, array(
             CURLOPT_URL => $this->getUrlRest()."/subject/v2",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+            //CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($img)],
+            CURLOPT_POSTFIELDS => json_encode([ "name" => $name, "store" => $store, "photo" => curl_file_create($img)]),
             // or use URL
             // CURLOPT_POSTFIELDS => [ "photo" => "https://dashboard.luxand.cloud/img/brad.jpg" ],
-            CURLOPT_HTTPHEADER => array("token"=>$this->getToken()),
+            CURLOPT_HTTPHEADER => array("token: ".$this->getToken()),
         ));
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
-        curl_close($curl);
 
         if ($err) {
             echo "cURL Error #:" . $err;
