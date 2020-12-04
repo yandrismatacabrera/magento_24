@@ -81,9 +81,7 @@ class Luxand extends \Magento\Framework\App\Helper\AbstractHelper
             CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($img)],
             // or use URL
             // CURLOPT_POSTFIELDS => [ "photo" => "https://dashboard.luxand.cloud/img/brad.jpg" ],
-            CURLOPT_HTTPHEADER => array(
-                "token: ".$this->getToken()
-            ),
+            CURLOPT_HTTPHEADER => array("token"=>$this->getToken()),
         ));
 
         $response = curl_exec($curl);
