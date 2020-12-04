@@ -80,17 +80,24 @@ class Luxand extends \Magento\Framework\App\Helper\AbstractHelper
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($this->getUrlBase().$img)],
+            CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($img)],
             CURLOPT_HTTPHEADER => array("token: ".$this->getToken()),
         ));
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        if ($err) {
+        if($statusCode != 200){
+            return false;
+        }
+
+        return true;
+
+        /*if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo $response;
-        }
+        }*/
     }
 }
