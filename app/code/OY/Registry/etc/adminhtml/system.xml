@@ -17,6 +17,9 @@
                 <field id="url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
                     <label>Url Rest</label>
                 </field>
+                <field id="host" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                    <label>Url Base</label>
+                </field>
             </group>
         </section>
     </system>
