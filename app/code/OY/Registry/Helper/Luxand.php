@@ -80,7 +80,7 @@ class Luxand extends \Magento\Framework\App\Helper\AbstractHelper
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($this->getUrlBase().$img)],
+            CURLOPT_POSTFIELDS => [ "name" => $name, "store" => $store, "photo" => curl_file_create($img)],
             CURLOPT_HTTPHEADER => array("token: ".$this->getToken()),
         ));
 
@@ -92,12 +92,41 @@ class Luxand extends \Magento\Framework\App\Helper\AbstractHelper
             return false;
         }
 
-        return true;
+        return json_decode($response)->id;
+
+        //return true;
 
         /*if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo $response;
         }*/
+    }
+
+    public function getPersonsList(){
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.luxand.cloud/subject",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => [ ],
+            CURLOPT_HTTPHEADER => array("token: ".$this->getToken())
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
     }
 }
