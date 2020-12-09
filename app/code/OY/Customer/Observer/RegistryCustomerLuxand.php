@@ -36,11 +36,19 @@ class RegistryCustomerLuxand implements ObserverInterface
             return $this;
         }
 
-        $img=$customer->getCustomAttribute('customer_image')->getValue();
+        $img=$customer->getCustomAttribute('photo')->getValue();
 
-        $imagePub ='pub/media/customer'.$img;
+        $imagePub ='pub/media'.$img;
 
-        $registry = $this->luxand->createCustomer($customer->getId(), 0, $imagePub);
+        //{ name: "Denis", ci: "62996855", email: "dlespinosa365@gmail.com", id: 20}
+        $nameCustomer = [];
+        $nameCustomer['id']=$customer->getId();
+        $nameCustomer['email']=$customer->getEmail();
+        $nameCustomer['name']=$customer->getFirstname().' '.$customer->getLastname();
+        $nameCustomer['ci']=$customer->getCustomAttribute('ci')->getValue();
+
+        $name=(string)json_encode($nameCustomer);
+        $registry = $this->luxand->createCustomer($name, 0, $imagePub);
 
         if($registry){
           $customer->setCustomAttribute('luxand_registry',1);
