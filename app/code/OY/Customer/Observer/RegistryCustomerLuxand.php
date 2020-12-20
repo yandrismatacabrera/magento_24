@@ -9,6 +9,7 @@ namespace OY\Customer\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Lentesplus\Stores\Api\Data\StoresInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class RegistryCustomerLuxand implements ObserverInterface
 {
@@ -17,13 +18,15 @@ class RegistryCustomerLuxand implements ObserverInterface
         \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\Framework\Message\ManagerInterface $manager
+        \Magento\Framework\Message\ManagerInterface $manager,
+        \Magento\Framework\App\Action\Context $context
     ) {
         $this->luxand         = $luxand;
         $this->directoryList=$directoryList;
         $this->storeManager=$storeManager;
         $this->customerRepository=$customerRepository;
         $this->manager=$manager;
+        $this->messageManager = $context->getMessageManager();
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -35,6 +38,12 @@ class RegistryCustomerLuxand implements ObserverInterface
 
             return $this;
         }
+
+        if(!$customer->getCustomAttribute('photo')){
+            $this->messageManager->addError('Debe ingresar una imagen personal.');
+            throw new NoSuchEntityException(__('Debe ingresar una imagen personal.'));
+        }
+
 
         $img=$customer->getCustomAttribute('photo')->getValue();
 

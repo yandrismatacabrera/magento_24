@@ -39,6 +39,17 @@ define([
 
             setTimeout(function () {
 
+                jQuery('div[data-index="website_id"]').hide();
+                jQuery('div[data-index="group_id"]').hide();
+                jQuery('div[data-index="luxand_registry"]').hide();
+                jQuery('div[data-index="prefix"]').hide();
+                jQuery('div[data-index="middlename"]').hide();
+                jQuery('div[data-index="suffix"]').hide();
+                jQuery('div[data-index="extension_attributes.assistance_allowed"]').hide();
+                jQuery('div[data-index="taxvat"]').hide();
+                jQuery('div[data-index="sendemail_store_id"]').hide();
+                jQuery('input[name="customer[disable_auto_group_change]"]').parent().parent().hide();
+
                 jQuery('div[data-index="photo"]').hide();
                 jQuery('div[data-index="luxand_id"]').hide();
                 jQuery('input[name="customer[customer_image]"]').parent().parent().parent().parent().hide();
@@ -52,6 +63,17 @@ define([
             jQuery(document).on('click', '#tab_customer', function (){
 
                 setTimeout(function () {
+
+                    jQuery('div[data-index="website_id"]').hide();
+                    jQuery('div[data-index="group_id"]').hide();
+                    jQuery('div[data-index="luxand_registry"]').hide();
+                    jQuery('div[data-index="prefix"]').hide();
+                    jQuery('div[data-index="middlename"]').hide();
+                    jQuery('div[data-index="suffix"]').hide();
+                    jQuery('div[data-index="extension_attributes.assistance_allowed"]').hide();
+                    jQuery('div[data-index="taxvat"]').hide();
+                    jQuery('div[data-index="sendemail_store_id"]').hide();
+                    jQuery('input[name="customer[disable_auto_group_change]"]').parent().parent().hide();
 
                     jQuery('div[data-index="photo"]').hide();
                     jQuery('div[data-index="luxand_id"]').hide();
@@ -74,6 +96,16 @@ define([
                 var video = document.getElementById('customer-video');
                 var imgBase64 = self.getImageFromVideo(video);
                 self.savePhoto(imgBase64);
+
+            })
+
+            jQuery(document).on('click',function (){
+
+                if(jQuery('div[data-index="photo"]').hasClass('_error')){
+                    jQuery('.cl_photo-error').show();
+                }else{
+                    jQuery('.cl_photo-error').hide();
+                }
 
             })
 
