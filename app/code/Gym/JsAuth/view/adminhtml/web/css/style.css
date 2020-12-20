@@ -4,3 +4,12 @@
     object-fit: contain;
     display: inline-block;
 }
+.alert, .btn {
+    font-size: 2rem !important;
+}
+.card-user-info {
+    font-size: 1.5rem !important;
+}
+.card-user-name {
+    font-size: 3rem !important;
+}

@@ -1,51 +1,75 @@
 <?php
-
-
 /**
  * Product list template
  *
  * @var $block \Gym\JsAuth\Block\Adminhtml\Auth
  */
 ?>
-<div class="row">
-    <div class="col-10">
+
+<div class="row" id="appvue">
+    <div class="col-12">
+        <div :class="'alert alert-' + info.type" role="alert">
+            <div v-if="info.showSpinner" class="spinner-grow" role="status">
+            </div>  {{ info.msg }}
+        </div>
+    </div>
+    <div class="col-8">
         <div class="card">
-            <div class="card-header" id="video-header-card">
-                Video
-            </div>
             <div class="card-body">
                 <video id="main-video" autoplay muted></video>
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-action="toggleRecognition">Iniciar reconocimiento</button>
+                <button 
+                    :disabled="isProcessing" 
+                    type="button" 
+                    class="btn btn-success btn-lg btn-block"
+                    v-on:click="initFaceDetection"
+                    >Iniciar reconocimiento</button>
             </div>
         </div>
 
     </div>
-    <div class="col-2">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap" id="person-image">
+    <div class="col-4">
+        <div class="card card-user-info" v-if="isSucessfullyIdentify">
+            <img class="card-img-top" v-bind:src="'data:image/png;base64,' + identifiedPerson.image64" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title" id="person-name">Desconocido</h5>
+                <h5 class="card-title card-user-name">{{ identifiedPerson.name }}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span>{{ identifiedPerson.email }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>CI:</strong>
+                            <span>{{ identifiedPerson.ci }}</span>
+                        </li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>CI:</strong><span id="person-ci"></span></li>
-                <li class="list-group-item"><strong>Email:</strong><span id="person-email"></span></li>
-            </ul>
-            <div class="card-body">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-action="AccessRegister">Registrar Acceso</button>
+            <div class="card-footer">
+                <button 
+                    :disabled="isProcessing"  
+                    type="button" 
+                    v-on:click="accessRegister"
+                    class="btn btn-success btn-lg btn-block"
+                    >Registrar Acceso</button>
+                    <button 
+                    :disabled="isProcessing"  
+                    type="button" 
+                    v-on:click="resetValues"
+                    class="btn btn-danger btn-lg btn-block"
+                    >Ocultar</button>
             </div>
+            
         </div>
     </div>
 </div>
-<input id="urlregistry-hide" type="hidden" value="<?= $block->getUrlRegistry() ?>">
 <script type="text/x-magento-init">
     {
         "*": {
             "jsAuth": {
                 "assetBaseUrl" : "<?= $block->getAdminBaseUrl() ?>",
                 "luxandApiUrl" : "<?= $block->getApiUrl() ?>",
-                "luxandToken" : "<?= $block->getApiToken() ?>"
+                "luxandToken" : "<?= $block->getApiToken() ?>",
+                "registerUrl" : "<?= $block->getUrlRegistry() ?>"
                 }
         }
     }
