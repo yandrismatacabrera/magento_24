@@ -95,6 +95,14 @@ define([
                             type: 'success' 
                         });
                     }
+                },
+                identifiedPerson: function identifiedPerson(newValue) {
+                    if (newValue === false) {
+                        this.info = Object.assign({}, {
+                            msg: 'No se pudo identificar al usuario, intente nuevamente.', 
+                            type: 'danger' 
+                        });
+                    }
                 }
                 
             },
@@ -202,7 +210,7 @@ define([
                     } catch (e) {
                         console.log(e);
                     }
-                    return null;
+                    return false;
                 },
                 accessRegister: function accessRegister() {
                     const settings = {
